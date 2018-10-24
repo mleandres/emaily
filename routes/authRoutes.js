@@ -11,16 +11,18 @@ module.exports = app => {
   // in callback route, code is present in URI so passport sees that and handles it
   app.get(
     '/auth/google/callback',
-    passport.authenticate('google')
+    passport.authenticate('google'),
+    (req, res) => {
+      res.redirect('/surveys')
+    }
   )
 
   app.get('/api/logout', (req, res) => {
     req.logout()
-    res.send(req.user)
+    res.redirect('/')
   })
 
   app.get('/api/current_user', (req, res) => {
-    res.send(req.session)
-    // res.send(req.user)
+    res.send(req.user)
   })
 }
