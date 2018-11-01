@@ -6,9 +6,9 @@ const Dashboard = () => {
   return (
     <div>
       <SurveyList />
-      <div className='fixed-action-btn bottom right' style={{ position: 'relative', right: '0px' }}>
+      <div className='fixed-action-btn bottom right'>
         <Link to='/surveys/new' className='btn-floating btn-large red'>
-          <i className='material-icons'>add</i>
+          <i className='large material-icons'>add</i>
         </Link>
       </div>
     </div>
