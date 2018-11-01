@@ -1,12 +1,12 @@
 import axios from 'axios'
-import { FETCH_USER } from './types'
+import { FETCH_USER, FETCH_SURVEYS } from './types'
 
 // define action creator
 // refactored action creator to use redux-thunk
 export const fetchUser = () => async dispatch => {
-  const res = await axios.get('/api/current_user')
-  dispatch({ type: FETCH_USER, payload: res.data })
-}
+  const res = await axios.get('/api/current_user');
+  dispatch({ type: FETCH_USER, payload: res.data });
+};
 
 // Redux thunk
 //  big funnel waiting for actions
@@ -25,6 +25,20 @@ export const fetchUser = () => async dispatch => {
 // after getting response from api, the action that was created will be dispatched to reducers
 
 export const handleStripeToken = token => async dispatch => {
-  const res = await axios.post('/api/stripe', token)
-  dispatch({ type: FETCH_USER, payload: res.data })
-}
+  const res = await axios.post('/api/stripe', token);
+  dispatch({ type: FETCH_USER, payload: res.data });
+};
+
+export const submitSurvey = (values, history) => async dispatch => {
+  const res = await axios.post('/api/surveys', values);
+
+  // redirects user. (not sure if i like this, would rather only redirect if successful)
+  history.push('/surveys');
+  dispatch({ type: FETCH_USER, payload: res.data });
+};
+
+export const fetchSurveys = () => async dispatch => {
+  const res = await axios.get('/api/surveys');
+
+  dispatch({ type: FETCH_SURVEYS, payload: res.data });
+};

@@ -5,6 +5,7 @@ const passport = require('passport')
 const keys = require('./config/keys')
 const bodyParser = require('body-parser')
 require('./models/User')
+require('./models/Survey')
 require('./services/passport')
 
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true })
@@ -25,6 +26,7 @@ app.use(passport.session())
 // require returns the function that was exported
 require('./routes/authRoutes')(app)
 require('./routes/billingRoutes')(app)
+require('./routes/surveyRoutes')(app)
 
 // configure express to serve front end assets properly in production
 if (process.env.NODE_ENV === 'production') {
