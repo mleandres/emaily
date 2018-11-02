@@ -12,7 +12,8 @@ const surveySchema = new Schema({
   // this will be a reference to the id of the user that this survey belongs to
   _user: { type: Schema.Types.ObjectId, ref: 'User' },
   dateSent: Date,
-  lastResponded: Date
+  lastResponded: Date,
+  deleted: { type: Boolean, default: false }
 })
 
 mongoose.model('surveys', surveySchema)

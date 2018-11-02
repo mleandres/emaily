@@ -24,7 +24,7 @@ class SurveyForm extends Component {
   render () {
     const { handleSubmit } = this.props
     return (
-      <div>
+      <div className='container'>
         <form onSubmit={handleSubmit}>
           {this.renderFields()}
           <Link to='/surveys' className='red btn-flat white-text'>

@@ -42,3 +42,10 @@ export const fetchSurveys = () => async dispatch => {
 
   dispatch({ type: FETCH_SURVEYS, payload: res.data.reverse() });
 };
+
+export const deleteSurvey = surveyId => async dispatch => {
+  console.log(`deleting ${surveyId}`)
+  const res = await axios.patch(`api/surveys/delete/${surveyId}`);
+
+  dispatch({ type: FETCH_SURVEYS, payload: res.data.reverse() })
+}

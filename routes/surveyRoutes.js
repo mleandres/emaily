@@ -10,20 +10,38 @@ const surveyTemplate = require('../services/emailTemplates/surveyTemplates');
 // importing Survey model class like this for ease in testing
 const Survey = mongoose.model('surveys');
 
+async function getSurveysForUser (userId) {
+  return await Survey.find({ _user: userId, deleted: { $ne: true } })
+    .select({ recipients: false });
+}
+
 // route handler to create a new survey and send a large group of emails to users
 module.exports = app => {
   app.get('/api/surveys',
     requireLogin,
     async (req, res) => {
-    const surveys = await Survey.find({ _user: req.user.id })
-      .select({ recipients: false });
-    
-    res.send(surveys);
+      const surveys = await getSurveysForUser(req.user.id)
+      res.send(surveys);
   });
 
   app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.send('Thanks for voting!');
   });
+
+  app.patch('/api/surveys/delete/:surveyId', 
+    requireLogin,
+    async (req, res) => {
+      const { surveyId } = req.params
+      console.log(surveyId)
+      await Survey.updateOne({
+        _id: surveyId
+        }, {
+          $set: { 'deleted': true }
+      });
+      const surveys = await getSurveysForUser(req.user.id)
+      res.send(surveys)
+    }
+  );
 
   app.post('/api/surveys/webhooks', (req, res) => {
     const p = new Path('/api/surveys/:surveyId/:choice');
