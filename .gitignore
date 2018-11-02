@@ -2,3 +2,4 @@ node_modules
 dev.js
 example.js
 setupProxy.js
+.DS_Store
