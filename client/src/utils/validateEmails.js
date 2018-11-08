@@ -8,7 +8,7 @@ const validateEmails = emails => {
       .filter(email => re.test(email) === false)
 
     if (invalidEmails.length) {
-      return `These emails are invalid: ${invalidEmails}`
+      return `These emails are invalid: ${invalidEmails}. Emails should be separated by commas.`
     }
   }
   return
