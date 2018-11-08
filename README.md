@@ -1,4 +1,4 @@
-# Emaily
+# Survey Sender
 
 ### Improvements
 

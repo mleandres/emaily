@@ -11,6 +11,10 @@ import Dashboard from './Dashboard'
 import SurveyNew from './surveys/SurveyNew'
 
 class App extends Component {
+  componentDidMount () {
+    document.title = 'Survey Sender'
+  }
+
   render () {
     return (
       <BrowserRouter>

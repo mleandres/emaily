@@ -34,7 +34,7 @@ class Header extends Component {
             className='left brand-logo'
             style={{ padding: '0 5px' }}
           >
-            Emaily
+            Survey Sender
           </Link>
           <ul className='right'>
             {this.renderContent()}
