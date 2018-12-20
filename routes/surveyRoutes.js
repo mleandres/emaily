@@ -102,15 +102,17 @@ module.exports = app => {
       });
 
       const mailer = new Mailer(survey, surveyTemplate(survey));
-
       try {
+        console.log('nice')
         await mailer.send();
+        console.log('nice2')
         await survey.save();
         req.user.credits -= 1;
         const user = await req.user.save();
 
         res.send(user);
       } catch (err) {
+        console.log(err)
         res.status(422).send(err);
       }
     }
